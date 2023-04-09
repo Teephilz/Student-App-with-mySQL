@@ -4,16 +4,16 @@ import '../models/student_model.dart';
 import 'package:http/http.dart' as http;
 
 class StudentController{
-  static const VIEW_URL="http://192.168.175.126/students_api/view.php";
-  static const CREATE_URL="http://192.168.175.126/students_api/create.php";
-  static const DELETE_URL="http://192.168.175.126/students_api/delete.php";
-  static const UPDATE_URL="http://192.168.175.126/students_api/update.php";
+  static const VIEW_URL="http://192.168.254.126/students_api/view.php";
+  static const CREATE_URL="http://192.168.254.126/students_api/create.php";
+  static const DELETE_URL="http://192.168.254.126/students_api/delete.php";
+  static const UPDATE_URL="http://192.168.254.126/students_api/update.php";
 
 
   Future<List<StudentModel>> getStudents() async{
   final response = await http.get(Uri.parse(VIEW_URL));
   if(response.statusCode== 200){
-   final Iterable list= json.decode(response.body);
+    final list= json.decode(response.body) as List<dynamic>;
    return list.map((e) => StudentModel.fromJson(e)).toList();
   }
   else{
